@@ -64,10 +64,9 @@ import org.lenskit.transform.normalize.VectorNormalizer;
 public class HelloLenskit implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(HelloLenskit.class);
     protected final EntityType LIKE = EntityType.forName("like");
-    private Path dataFile = Paths.get("data/ratings2.csv");
-    private List<Long> users;
+    private final Path dataFile = Paths.get("data/ratings2.csv");
+    private final List<Long> users;
     protected File inputFile;
-//    protected StaticDataSource source;
     protected StaticDataSource implicitSource;
 
     public static void main(String[] args) {
@@ -101,12 +100,6 @@ public class HelloLenskit implements Runnable {
         implicitSource.addSource(implicit);
         implicitSource.addDerivedEntity(CommonTypes.USER, LIKE, CommonAttributes.USER_ID);
         implicitSource.addDerivedEntity(CommonTypes.ITEM, LIKE, CommonAttributes.ITEM_ID);
-
-//        source = new StaticDataSource("ml-100k");
-//        TextEntitySource tes = new TextEntitySource();
-//        tes.setFile(dataFile);
-//        tes.setFormat(org.lenskit.data.dao.file.Formats.tsvRatings());
-//        source.addSource(tes);
         
         DataAccessObject dao = implicitSource.get();
 
